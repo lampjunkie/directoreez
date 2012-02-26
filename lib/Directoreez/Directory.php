@@ -17,6 +17,13 @@ interface Directory
 	public function getPath();
 
 	/**
+	 * Create the root directory if it doesn't exist
+	 *
+	 * @return void
+	 */
+	public function create();
+
+	/**
 	 * Copy from a given location to a relative location
 	 * within the current directory
 	 * 

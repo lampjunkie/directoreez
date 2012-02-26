@@ -21,14 +21,19 @@ class LocalDirectory implements Directory
 	 * Create the Directory object with the given path
 	 * 
 	 * @param string $path
-	 * @param boolean $isAutoCreate
 	 */
-	public function __construct($path, $isAutoCreate = true)
+	public function __construct($path)
 	{
 		$this->path = $path;
-		if($isAutoCreate && !file_exists($path)){
-			mkdir($path, 0777, true);
-		}
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Directoreez.Directory::create()
+	 */
+	public function create($permissions = 0777)
+	{
+		$this->mkdir('/', $permissions);
 	}
 
 	/**

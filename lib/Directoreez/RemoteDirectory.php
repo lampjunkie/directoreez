@@ -57,7 +57,7 @@ class RemoteDirectory implements Directory
 	 * @param integer $port
 	 * @param Authentication $authentication
 	 */
-	public function __construct($path, $isAutoCreate = true, $host, $port, Authentication $authentication)
+	public function __construct($path, $host, $port, Authentication $authentication)
 	{
 		$this->path = $path;
 		$this->host = $host;
@@ -65,10 +65,15 @@ class RemoteDirectory implements Directory
 		$this->authentication = $authentication;
 		$this->connection = ssh2_connect($host, $port, array('hostkey'=>'ssh-rsa'));
 		$this->authentication->authenticate($this->connection);
-		
-		if($isAutoCreate && !$this->exists('')){
-			$this->mkdir('');
-		}
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Directoreez.Directory::create()
+	 */
+	public function create($permissions = 0777)
+	{
+		$this->mkdir('/', $permissions);
 	}
 
 	/**
@@ -159,7 +164,12 @@ class RemoteDirectory implements Directory
 	 */
 	public function getFileContents($path)
 	{
-		return file_get_contents($this->getPathFor($path));
+		$tmp = '/tmp/' . md5(time() . rand());
+		file_put_contents($tmp, $contents);
+		ssh2_scp_recv($this->connection, $this->getPathFor($path), $tmp);
+		$contents = file_get_contents($tmp);
+		unlink($tmp);
+		return $content;s
 	}
 
 	/**

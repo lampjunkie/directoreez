@@ -33,8 +33,11 @@ Remote Directory:
 
 Operations:
 
+    // create the root directory if it doesn't exist already
+    $directory->create(0777);
+
     // create a new directory relative to the Directory object's root
-    $directory->mkdir('/new-directory', 777);
+    $directory->mkdir('/new-directory', 0777);
 
     // put a new file
     $directory->fputs('/new-directory/new-file.txt', 'hello world');
@@ -60,15 +63,15 @@ Operations:
     // empty an entire directory
     $directory->clean();
 
-	// execute a command
-	// you must provide an anonymous function which accepts the absolute path to the given directory
-	$contents = $directory->execute('/some/directory', function($path){
-		return "ls -la {$path}";
-	});
+    // execute a command
+    // you must provide an anonymous function which accepts the absolute path to the given directory
+    $contents = $directory->execute('/some/directory', function($path){
+        return "ls -la {$path}";
+    });
 
     // switch Directory to a new root
     for($x=0; $x<10; $x++){
         $directory->switchTo('/path/to/directory/' . $x);
         var_dump($directory->ls());
     }
-	
+
