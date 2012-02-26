@@ -51,7 +51,11 @@ class LocalDirectory implements Directory
 	 */
 	public function copyFrom($from, $to)
 	{
-		copy($from, $this->getPathFor($to));
+		if(is_dir($from)){
+			$this->copyDirectory($from, $this->getPathFor($to));
+		} else {
+			copy($from, $this->getPathFor($to));
+		}
 	}
 
 	/**
@@ -60,7 +64,13 @@ class LocalDirectory implements Directory
 	 */
 	public function copyTo($to, $from)
 	{
-		copy($this->getPathFor($from), $to);
+		$from = $this->getPathFor($from);
+		
+		if(is_dir($from)){
+			$this->copyDirectory($from, $to);
+		} else {
+			copy($from, $to);
+		}
 	}
 
 	/**
@@ -206,6 +216,34 @@ class LocalDirectory implements Directory
 			}
 			reset($objects);
 			rmdir($dir);
+		}
+	}
+	
+	/**
+	 * Copy an entire directory
+	 *
+	 * @param string $source
+	 * @param string $destination
+	 */
+	protected function copyDirectory($source, $destination)
+	{
+		if(is_dir($source)){
+			@mkdir( $destination);
+			$directory = dir( $source);
+			while (false !== ($readdirectory = $directory->read())){
+				if ($readdirectory == '.' || $readdirectory == '..'){
+					continue;
+				}
+				$pathDir = $source . '/' . $readdirectory;
+				if (is_dir($pathDir)){
+					copy_directory($pathDir, $destination . '/' . $readdirectory);
+					continue;
+				}
+				copy($pathDir, $destination . '/' . $readdirectory);
+			}
+			$directory->close();
+		} else {
+			copy($source, $destination);
 		}
 	}
 }
