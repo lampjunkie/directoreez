@@ -7,7 +7,7 @@ Overview
 Directoreez is a PHP 5.3 library which abstracts the manipulation of local or remote directories. It
 is intended to enable the developer to perform standard file operations relative to a given root
 directory path. By providing a standard "Directory" interface the developer is also able to easily switch out
-local and remote directories within their applications by simply using a different Directory object.
+local and remote directories within their applications by simply using a different Directory implementation.
 
 Requirements
 ------------
