@@ -60,11 +60,11 @@ class PublicKey implements Authentication
 	 */
 	public function authenticate($connection)
 	{
-		if (ssh2_auth_pubkey_file($connection, $this->username,
-		$this->publicKeyFile, $this->privateKeyFile, $this->passphrase)) {
+		if(@ssh2_auth_pubkey_file($connection, $this->username,
+			$this->publicKeyFile, $this->privateKeyFile, $this->passphrase)){
 			return true;
 		} else {	
-			throw new \Exception('Could not connect to remote host');
+			throw new AuthenticationException('Could not connect to remote server');
 		}
 	}
 }

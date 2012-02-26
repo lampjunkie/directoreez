@@ -42,6 +42,10 @@ class Password implements Authentication
 	 */
 	public function authenticate($connection)
 	{
-		ssh2_auth_password($connection, $this->username, $this->password);
+		if(@ssh2_auth_password($connection, $this->username, $this->password)){
+			return true;
+		} else {
+			throw new AuthenticationException("Couldn't connect to remote server");
+		}
 	}
 }

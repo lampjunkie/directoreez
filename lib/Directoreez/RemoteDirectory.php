@@ -56,6 +56,7 @@ class RemoteDirectory implements Directory
 	 * @param string $host
 	 * @param integer $port
 	 * @param Authentication $authentication
+	 * @throws AuthenticationException
 	 */
 	public function __construct($path, $host, $port, Authentication $authentication)
 	{
@@ -169,7 +170,7 @@ class RemoteDirectory implements Directory
 		ssh2_scp_recv($this->connection, $this->getPathFor($path), $tmp);
 		$contents = file_get_contents($tmp);
 		unlink($tmp);
-		return $content;s
+		return $contents;
 	}
 
 	/**

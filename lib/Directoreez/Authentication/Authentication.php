@@ -15,6 +15,7 @@ interface Authentication
 	 * 
 	 * @param resource $connection
 	 * @return void
+	 * @throws AuthenticationException
 	 */
 	public function authenticate($connection);
 }
