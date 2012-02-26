@@ -66,3 +66,9 @@ Operations:
 		return "ls -la {$path}";
 	});
 
+    // switch Directory to a new root
+    for($x=0; $x<10; $x++){
+        $directory->switchTo('/path/to/directory/' . $x);
+	var_dump($directory->ls();
+    }
+	

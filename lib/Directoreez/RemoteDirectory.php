@@ -209,6 +209,15 @@ class RemoteDirectory implements Directory
 	}
 	
 	/**
+	 * (non-PHPdoc)
+	 * @see Directoreez.Directory::switchTo()
+	 */
+	public function switchTo($path)
+	{
+		$this->path = $path;
+	}
+	
+	/**
 	 * Get the absolute path for a path relative to the
 	 * current directory
 	 * 

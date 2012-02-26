@@ -132,4 +132,12 @@ interface Directory
 	 * @return void
 	 */
 	public function chmod($filename, $mode);
+
+	/**
+	 * Switch to a new root path
+	 *
+	 * @param string $path
+	 * @return void
+	 */
+	public function switchTo($path);
 }

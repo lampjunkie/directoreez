@@ -161,6 +161,15 @@ class LocalDirectory implements Directory
 	{
 		chmod($path, $mode);
 	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Directoreez.Directory::switchTo()
+	 */
+	public function switchTo($path)
+	{
+		$this->path = $path;
+	}
 	
 	/**
 	 * Get the absolute path for a path relative to the
