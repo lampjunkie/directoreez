@@ -187,17 +187,13 @@ class LocalDirectory implements Directory
 	}
 	
 	/**
-	 * Get the absolute path for a path relative to the
-	 * current directory
-	 * 
-	 * @param string $destination
-	 * @return string
+	 * (non-PHPdoc)
+	 * @see Directoreez.Directory::getPathFor()
 	 */
-	protected function getPathFor($destination)
+	public function getPathFor($destination)
 	{
 		return $this->path . $destination;
 	}
-
 
 	/**
 	 * Utility method to recursively remove nested directories

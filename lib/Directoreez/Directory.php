@@ -147,4 +147,12 @@ interface Directory
 	 * @return void
 	 */
 	public function switchTo($path);
+
+	/**
+	 * Get the full path for a sub path
+	 *
+	 * @param string $path
+	 * @return string
+	 */
+	public function getPathFor($path);
 }
